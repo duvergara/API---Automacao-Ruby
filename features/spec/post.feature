@@ -8,6 +8,10 @@ Given que desejo efetuar a Cotação de um pedido dentro do estado
  And campo final_shipping_cost deve exibir  Preço de envio
  Then deve retornar 200
 
+Scenario:Validar autenticação Api
+Given que desejo efetuar a Cotação e informo chave de segurança invalida 
+Then deve retornar codigo 401
+
 Scenario:Validar retorno cotação campo weight invalido
 Given que desejo efetuar a Cotação de um pedido dentro do estado weight invalido
 Then deve retornar 400 e  mensagem de erro
@@ -51,7 +55,7 @@ Then deve retornar 400 é mensagem Sem opções de entrega viável
 Scenario: Validar cotação origem canal de vendas CN123 
 Given que origem da cotação seja canal de vendas CN123 e cep esteja entre as faixas  22710-010 e 22710-990
 Then deve retornar 200 não deve disponibilizar a opção de entrega Correios PAC
-
+@post
 Scenario:Validar prazo de entrega  destino seja o estado do Pará 
 Given que desejo efetuar a Cotação de um pedido cujo destino seja o estado do Pará 
 Then deve retornar 200 e prazo de entrega esperado é de 20 dias

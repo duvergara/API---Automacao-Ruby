@@ -107,4 +107,47 @@ end
     @response.body = JSON(@response.body)
   end
 
+  Given("que desejo efetuar a Cotação e informo chave de segurança invalida") do
+    @response = apipost.apiChave_invalida 
+    @response.body = JSON(@response.body)
+  end
+  
+  Then("deve retornar codigo {int}") do |codigo|
+    expect(@response.code).to eq "401"
+    puts "Código de retorno é #{@response.code}"
+ 
+  end
+
+  Given("que desejo efetuar a Cotação de um pedido dentro do estado weight invalido") do
+    @response = apipost.reqValidar_eweight_invalido
+    @response.body = JSON(@response.body)
+  end
+  Given("que origem da cotação seja canal de vendas CN{int} e cep esteja entre as faixas  {int}{int} e {int}{int}") do |int, int2, int3, int4, int5|
+    pending # Write code here that turns the phrase above into concrete actions
+  end
+  
+  Then("deve retornar {int} não deve disponibilizar a opção de entrega Correios PAC") do |int|
+    pending # Write code here that turns the phrase above into concrete actions
+  end
+  
+  Given("que desejo efetuar a Cotação de um pedido cujo destino seja o estado do Pará") do
+    @response = apipost.reqDestino_Para
+    @response.body = JSON(@response.body)
+  end
+  
+  Then("deve retornar {int} e prazo de entrega esperado é de {int} dias") do |codigo, codigo1|
+    puts @response.body["content"]["delivery_options"][0]["delivery_estimate_business_days"]
+    expect(@response.body["content"]["delivery_options"][0]["delivery_estimate_business_days"]).to eq 20
+    expect(@response.code).to eq "200"
+    puts "Código de retorno é #{@response.code}"
+    expect(@response.message).to eq "OK" 
+  end
+  
+  Given("que desejo efetuar a Cotação de um pedido SKU \(identificador) do produto seja SKU{int}") do |int|
+    pending # Write code here that turns the phrase above into concrete actions
+  end
+  
+  Then("deve retornar {int} e  não deve disponibilizar a opção de entrega Correios PAC.") do |int|
+    pending # Write code here that turns the phrase above into concrete actions
+  end
   
